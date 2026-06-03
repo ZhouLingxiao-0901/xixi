@@ -1,0 +1,81 @@
+<view class="container">
+  <!-- 统计卡片 -->
+  <view class="stats-row fade-in">
+    <view class="stat-card" wx:for="{{statsCards}}" wx:key="key">
+      <view class="stat-num" style="color:{{item.color}}">{{item.value}}</view>
+      <view class="stat-label">{{item.label}}</view>
+    </view>
+  </view>
+
+  <!-- 今日待办标题 -->
+  <view class="section-header">
+    <text class="section-title">今日待办</text>
+    <text class="add-btn" bindtap="showAdd">+ 新增</text>
+  </view>
+
+  <!-- 待办列表 -->
+  <view wx:if="{{tasks.length === 0}}" class="empty-state fade-in">
+    <text class="empty-icon">📋</text>
+    <text class="empty-text">还没有待办事项</text>
+    <text class="empty-hint">点击右上角 + 添加一个吧</text>
+  </view>
+
+  <view wx:for="{{tasks}}" wx:key="id" class="task-card card slide-up" style="animation-delay:{{index * 0.05}}s">
+    <view class="task-left" bindtap="onToggle" data-id="{{item.id}}">
+      <view class="checkbox {{item.completed ? 'checked' : ''}}">
+        <text wx:if="{{item.completed}}">&#10003;</text>
+      </view>
+    </view>
+    <view class="task-body">
+      <view class="task-title {{item.completed ? 'done' : ''}}">{{item.title}}</view>
+      <view class="task-meta">
+        <text class="tag tag-{{item.category}}">{{categoryLabel[item.category]}}</text>
+        <text wx:if="{{item.deadline}}" class="deadline">📅 {{item.deadline}}</text>
+      </view>
+    </view>
+    <view class="task-right">
+      <text class="pin-btn {{item.pinned ? 'pinned' : ''}}" bindtap="onPin" data-id="{{item.id}}">📌</text>
+      <text class="del-btn" bindtap="onDelete" data-id="{{item.id}}">🗑</text>
+    </view>
+  </view>
+</view>
+
+<!-- 新增弹窗 -->
+<view class="modal {{showModal ? 'show' : ''}}" wx:if="{{showModal}}">
+  <view class="modal-mask" bindtap="hideAdd"></view>
+  <view class="modal-content slide-up" catchtap="preventClose">
+    <text class="modal-title">新增待办</text>
+    <input
+      class="modal-input"
+      placeholder="输入任务标题..."
+      value="{{newTitle}}"
+      bindinput="onTitleInput"
+      catchtap="preventClose"
+      adjust-position="{{true}}"
+    />
+    <view class="modal-row" catchtap="preventClose">
+      <text class="modal-label">分类</text>
+      <view class="tag-group">
+        <text class="tag tag-study {{newCategory === 'study' ? 'active' : ''}}" catchtap="setCategory" data-cat="study">学习</text>
+        <text class="tag tag-work {{newCategory === 'work' ? 'active' : ''}}" catchtap="setCategory" data-cat="work">工作</text>
+        <text class="tag tag-leisure {{newCategory === 'leisure' ? 'active' : ''}}" catchtap="setCategory" data-cat="leisure">休闲</text>
+      </view>
+    </view>
+    <view class="modal-row" catchtap="preventClose">
+      <text class="modal-label">日期</text>
+      <picker mode="date" value="{{newDeadlineDate}}" bindchange="onDateChange">
+        <view class="picker-val">{{newDeadlineDate || '选择日期'}}</view>
+      </picker>
+    </view>
+    <view class="modal-row" catchtap="preventClose">
+      <text class="modal-label">时间</text>
+      <picker mode="time" value="{{newDeadlineTime}}" bindchange="onTimeChange">
+        <view class="picker-val">{{newDeadlineTime || '选择时间'}}</view>
+      </picker>
+    </view>
+    <view class="modal-btns" catchtap="preventClose">
+      <button class="btn-outline" catchtap="hideAdd">取消</button>
+      <button class="btn-primary" catchtap="onAdd">确认添加</button>
+    </view>
+  </view>
+</view>

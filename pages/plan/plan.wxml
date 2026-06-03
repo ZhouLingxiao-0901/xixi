@@ -1,0 +1,76 @@
+<view class="container">
+  <scroll-view class="filter-bar" scroll-x>
+    <text class="filter-tag {{activeCat === 'all' ? 'active' : ''}}" bindtap="filterCat" data-cat="all">全部</text>
+    <text class="filter-tag {{activeCat === 'study' ? 'active' : ''}}" bindtap="filterCat" data-cat="study">📚 学习</text>
+    <text class="filter-tag {{activeCat === 'work' ? 'active' : ''}}" bindtap="filterCat" data-cat="work">💼 工作</text>
+    <text class="filter-tag {{activeCat === 'leisure' ? 'active' : ''}}" bindtap="filterCat" data-cat="leisure">🎮 休闲</text>
+  </scroll-view>
+
+  <view wx:if="{{pinnedTasks.length > 0}}" class="section fade-in">
+    <text class="section-title">📌 置顶</text>
+    <view wx:for="{{pinnedTasks}}" wx:key="id" class="task-row card">
+      <text class="task-cat-dot" style="background:{{catColor[item.category]}}"></text>
+      <view class="task-info">
+        <text class="task-title">{{item.title}}</text>
+        <text wx:if="{{item.deadline}}" class="task-deadline">截止 {{item.deadline}}</text>
+      </view>
+      <text class="unpin-btn" bindtap="onUnpin" data-id="{{item.id}}">📌</text>
+    </view>
+  </view>
+
+  <view class="section fade-in">
+    <view class="section-header">
+      <text class="section-title">{{activeCat === 'all' ? '全部任务' : catLabel[activeCat] + ' 任务'}}</text>
+      <text class="add-btn" bindtap="showAdd">+ 新增</text>
+    </view>
+    <view wx:if="{{filteredTasks.length === 0}}" class="empty-hint">暂无任务</view>
+    <view wx:for="{{filteredTasks}}" wx:key="id" class="task-row card slide-up" style="animation-delay:{{index * 0.04}}s">
+      <view class="task-check" bindtap="onToggle" data-id="{{item.id}}">
+        <text class="{{item.completed ? 'checked' : ''}}">{{item.completed ? '✓' : '○'}}</text>
+      </view>
+      <view class="task-info">
+        <text class="task-title {{item.completed ? 'done' : ''}}">{{item.title}}</text>
+        <view class="task-meta-row">
+          <text class="cat-badge" style="background:{{catColor[item.category]}};color:#fff">{{catLabel[item.category]}}</text>
+          <text wx:if="{{item.deadline}}" class="deadline-text">⏰ {{item.deadline}}</text>
+        </view>
+      </view>
+      <view class="task-actions">
+        <text class="action-btn" bindtap="onPin" data-id="{{item.id}}">📌</text>
+        <text class="action-btn" bindtap="onDelete" data-id="{{item.id}}">🗑</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="modal {{showModal ? 'show' : ''}}" wx:if="{{showModal}}">
+    <view class="modal-mask" bindtap="hideAdd"></view>
+    <view class="modal-content slide-up" catchtap="preventClose">
+      <text class="modal-title">新增计划</text>
+      <input class="modal-input" placeholder="计划标题..." value="{{newTitle}}" bindinput="onTitleInput" catchtap="preventClose"/>
+      <view class="modal-row" catchtap="preventClose">
+        <text class="modal-label">分类</text>
+        <view class="tag-row">
+          <text class="tag-pick {{newCat === 'study' ? 'active' : ''}}" catchtap="pickCat" data-cat="study">📚 学习</text>
+          <text class="tag-pick {{newCat === 'work' ? 'active' : ''}}" catchtap="pickCat" data-cat="work">💼 工作</text>
+          <text class="tag-pick {{newCat === 'leisure' ? 'active' : ''}}" catchtap="pickCat" data-cat="leisure">🎮 休闲</text>
+        </view>
+      </view>
+      <view class="modal-row" catchtap="preventClose">
+        <text class="modal-label">日期</text>
+        <picker mode="date" value="{{newDeadlineDate}}" bindchange="onDateChange">
+          <view class="picker-val">{{newDeadlineDate || '选择日期'}}</view>
+        </picker>
+      </view>
+      <view class="modal-row" catchtap="preventClose">
+        <text class="modal-label">时间</text>
+        <picker mode="time" value="{{newDeadlineTime}}" bindchange="onTimeChange">
+          <view class="picker-val">{{newDeadlineTime || '选择时间'}}</view>
+        </picker>
+      </view>
+      <view class="modal-btns" catchtap="preventClose">
+        <button class="btn-outline" catchtap="hideAdd">取消</button>
+        <button class="btn-primary" catchtap="onAdd">确认</button>
+      </view>
+    </view>
+  </view>
+</view>

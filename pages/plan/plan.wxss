@@ -1,0 +1,64 @@
+.filter-bar {
+  white-space: nowrap; padding: 8rpx 0 20rpx; display: flex; gap: 16rpx;
+}
+.filter-tag {
+  display: inline-block; padding: 12rpx 28rpx; border-radius: 30rpx;
+  font-size: 26rpx; background: var(--card); color: var(--text-secondary);
+  transition: all 0.3s; flex-shrink: 0;
+}
+.filter-tag.active { background: var(--primary); color: #fff; font-weight: 600; }
+
+.section { margin-bottom: 28rpx; }
+.section-header {
+  display: flex; justify-content: space-between; align-items: center; margin-bottom: 14rpx;
+}
+.section-title { font-size: 28rpx; font-weight: 700; margin-bottom: 12rpx; display: block; }
+.add-btn { font-size: 26rpx; color: var(--primary); font-weight: 600; }
+
+.task-row {
+  display: flex; align-items: center; padding: 18rpx 22rpx; gap: 16rpx;
+}
+.task-cat-dot { width: 10rpx; height: 44rpx; border-radius: 6rpx; flex-shrink: 0; }
+.task-check { font-size: 32rpx; color: var(--text-secondary); flex-shrink: 0; }
+.task-check .checked { color: var(--success); }
+.task-info { flex: 1; }
+.task-title { font-size: 28rpx; }
+.task-title.done { text-decoration: line-through; opacity: 0.4; }
+.task-meta-row { display: flex; gap: 12rpx; margin-top: 6rpx; align-items: center; }
+.cat-badge { font-size: 20rpx; padding: 4rpx 14rpx; border-radius: 16rpx; }
+.deadline-text { font-size: 22rpx; color: var(--text-secondary); }
+.task-deadline { font-size: 22rpx; color: var(--text-secondary); display: block; margin-top: 4rpx; }
+.task-actions { display: flex; gap: 12rpx; }
+.action-btn { font-size: 28rpx; }
+.unpin-btn { font-size: 28rpx; transform: rotate(-45deg); }
+
+.empty-hint { text-align: center; color: var(--text-secondary); font-size: 24rpx; padding: 60rpx; }
+
+.modal {
+  position: fixed; inset: 0; z-index: 100;
+  display: flex; align-items: flex-end;
+}
+.modal-mask {
+  position: absolute; inset: 0; background: rgba(0,0,0,0.4);
+}
+.modal-content {
+  position: relative; width: 100%;
+  background: var(--card); border-radius: 32rpx 32rpx 0 0;
+  padding: 36rpx 32rpx;
+}
+.modal-title { font-size: 34rpx; font-weight: 700; margin-bottom: 24rpx; display: block; }
+.modal-input {
+  width: 100%; padding: 20rpx; border: 2rpx solid var(--border);
+  border-radius: var(--radius); font-size: 28rpx; margin-bottom: 20rpx; box-sizing: border-box;
+}
+.modal-row { display: flex; align-items: center; gap: 16rpx; margin-bottom: 18rpx; }
+.modal-label { font-size: 26rpx; color: var(--text-secondary); min-width: 60rpx; }
+.tag-row { display: flex; gap: 16rpx; }
+.tag-pick {
+  font-size: 24rpx; padding: 10rpx 22rpx; border-radius: 30rpx;
+  background: var(--bg); color: var(--text-secondary);
+}
+.tag-pick.active { background: var(--primary); color: #fff; font-weight: 600; }
+.picker-val { font-size: 26rpx; color: var(--primary); padding: 10rpx 0; }
+.modal-btns { display: flex; gap: 20rpx; margin-top: 24rpx; }
+.modal-btns button { flex: 1; }

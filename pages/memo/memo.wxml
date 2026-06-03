@@ -1,0 +1,30 @@
+<view class="container">
+  <view class="memo-input-card card">
+    <textarea
+      class="memo-textarea"
+      placeholder="写点随笔、想法、灵感..."
+      value="{{newMemo}}"
+      bindinput="onInput"
+      auto-height
+      maxlength="2000"
+    />
+    <view class="memo-footer">
+      <text class="char-count">{{newMemo.length}}/2000</text>
+      <button class="btn-primary memo-btn" bindtap="onAdd" disabled="{{!newMemo.trim()}}">记录</button>
+    </view>
+  </view>
+
+  <view wx:if="{{memos.length === 0}}" class="empty-state">
+    <text class="empty-icon">✍️</text>
+    <text class="empty-text">还没有随笔记录</text>
+    <text class="empty-hint">随手写下灵感吧</text>
+  </view>
+
+  <view wx:for="{{memos}}" wx:key="id" class="memo-card card fade-in" style="animation-delay:{{index * 0.06}}s">
+    <view class="memo-header">
+      <text class="memo-date">{{item.timeStr}}</text>
+      <text class="memo-del" bindtap="onDelete" data-id="{{item.id}}">🗑</text>
+    </view>
+    <text class="memo-text">{{item.text}}</text>
+  </view>
+</view>

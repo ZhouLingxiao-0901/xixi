@@ -1,0 +1,48 @@
+.view-switch {
+  display: flex; background: var(--card); border-radius: 40rpx;
+  padding: 6rpx; margin-bottom: 24rpx;
+}
+.switch-item {
+  flex: 1; text-align: center; padding: 14rpx; border-radius: 36rpx;
+  font-size: 26rpx; color: var(--text-secondary); transition: all 0.3s;
+}
+.switch-item.active { background: var(--primary); color: #fff; font-weight: 600; }
+
+.date-nav {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-bottom: 24rpx;
+}
+.nav-arrow { font-size: 28rpx; color: var(--primary); padding: 12rpx; }
+.nav-title { font-size: 30rpx; font-weight: 700; }
+
+.day-label { font-size: 36rpx; font-weight: 700; margin-bottom: 16rpx; }
+
+.week-header { display: flex; margin-bottom: 12rpx; }
+.week-day { flex: 1; text-align: center; font-size: 22rpx; color: var(--text-secondary); white-space: pre-line; }
+.week-day.today { color: var(--primary); font-weight: 700; }
+.week-body { display: flex; }
+.week-col { flex: 1; min-height: 120rpx; padding: 4rpx; }
+.week-dot { width: 12rpx; height: 12rpx; border-radius: 50%; margin: 2rpx auto; }
+
+.month-grid { display: flex; flex-wrap: wrap; }
+.grid-cell {
+  width: calc(100% / 7); text-align: center; padding: 14rpx 0;
+  font-size: 24rpx; position: relative; color: var(--text);
+}
+.grid-cell.header { font-weight: 600; color: var(--primary); }
+.grid-cell.other-month { opacity: 0.3; }
+.grid-cell.today .cell-date { background: var(--primary); color: #fff; border-radius: 50%; width: 48rpx; height: 48rpx; line-height: 48rpx; display: inline-block; }
+.cell-badge {
+  position: absolute; top: 4rpx; right: 6rpx;
+  background: #FF6B9D; color: #fff; border-radius: 50%;
+  width: 28rpx; height: 28rpx; line-height: 28rpx; font-size: 18rpx;
+}
+
+.section-header { font-size: 28rpx; font-weight: 700; margin: 28rpx 0 16rpx; }
+
+.task-item { display: flex; align-items: center; gap: 14rpx; padding: 18rpx 22rpx; }
+.dot { width: 16rpx; height: 16rpx; border-radius: 50%; flex-shrink: 0; }
+.task-text { font-size: 26rpx; flex: 1; }
+.task-text.done { text-decoration: line-through; opacity: 0.4; }
+
+.empty-hint { text-align: center; color: var(--text-secondary); font-size: 24rpx; padding: 40rpx; }

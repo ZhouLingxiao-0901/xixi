@@ -1,0 +1,64 @@
+<view class="container">
+  <!-- 主题模式 -->
+  <view class="section-title">🎨 显示设置</view>
+  <view class="card setting-row">
+    <text>主题模式</text>
+    <text class="val">{{themeLabel}}</text>
+  </view>
+  <view class="card setting-row">
+    <text>深色模式</text>
+    <switch checked="{{isDark}}" bindchange="onDarkSwitch" color="#6C63FF"/>
+  </view>
+
+  <!-- 预设壁纸 -->
+  <view class="section-title">🖼 全局背景</view>
+  <view class="preset-grid">
+    <view wx:for="{{presets}}" wx:key="index" class="preset-item {{bgPreset === item.key ? 'selected' : ''}}" bindtap="selectPreset" data-key="{{item.key}}">
+      <view class="preset-preview" style="background:{{item.gradient}}">
+        <text wx:if="{{item.key === 'default'}}" class="preset-emoji">🌄</text>
+        <text wx:elif="{{item.key === 'ocean'}}" class="preset-emoji">🌊</text>
+        <text wx:elif="{{item.key === 'forest'}}" class="preset-emoji">🌿</text>
+        <text wx:elif="{{item.key === 'sunset'}}" class="preset-emoji">🌅</text>
+        <text wx:elif="{{item.key === 'night'}}" class="preset-emoji">🌙</text>
+        <text wx:elif="{{item.key === 'pink'}}" class="preset-emoji">🌸</text>
+      </view>
+      <text class="preset-name">{{item.name}}</text>
+    </view>
+    <!-- 自定义上传 -->
+    <view class="preset-item {{bgPreset === 'custom' ? 'selected' : ''}}" bindtap="uploadBg">
+      <view class="preset-preview" style="background:var(--bg)">
+        <text class="preset-emoji">📷</text>
+      </view>
+      <text class="preset-name">自定义</text>
+    </view>
+  </view>
+
+  <!-- 当前背景预览 -->
+  <view wx:if="{{previewBg}}" class="bg-preview" style="background-image:url({{previewBg}});background-size:cover">
+    <text class="preview-tag">当前背景</text>
+  </view>
+
+  <!-- 数据管理 -->
+  <view class="section-title">💾 数据管理</view>
+  <view class="card setting-row" bindtap="exportData">
+    <text>导出数据</text>
+    <text class="arrow">›</text>
+  </view>
+  <view class="card setting-row" bindtap="clearData">
+    <text>清空全部数据</text>
+    <text class="warn-text">⚠</text>
+  </view>
+
+  <!-- 关于 -->
+  <view class="section-title">ℹ 关于</view>
+  <view class="card setting-row">
+    <text>版本</text>
+    <text class="val">v1.0.0</text>
+  </view>
+  <view class="card setting-row">
+    <text>开发</text>
+    <text class="val">年轻化日程管家</text>
+  </view>
+
+  <view class="footer-text">年轻化自定义日程管家 · 本地存储 · 数据安全</view>
+</view>

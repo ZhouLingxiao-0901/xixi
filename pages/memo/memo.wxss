@@ -1,0 +1,18 @@
+.memo-input-card { padding: 20rpx 24rpx; }
+.memo-textarea {
+  width: 100%; min-height: 120rpx; font-size: 28rpx; line-height: 1.8;
+}
+.memo-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 16rpx; }
+.char-count { font-size: 22rpx; color: var(--text-secondary); }
+.memo-btn { padding: 10rpx 36rpx; font-size: 26rpx; }
+
+.empty-state { text-align: center; padding: 100rpx 0; }
+.empty-icon { font-size: 64rpx; display: block; margin-bottom: 16rpx; }
+.empty-text { font-size: 28rpx; color: var(--text-secondary); display: block; }
+.empty-hint { font-size: 24rpx; color: var(--text-secondary); opacity: 0.6; margin-top: 6rpx; display: block; }
+
+.memo-card { padding: 24rpx; }
+.memo-header { display: flex; justify-content: space-between; margin-bottom: 12rpx; }
+.memo-date { font-size: 22rpx; color: var(--text-secondary); }
+.memo-del { font-size: 26rpx; }
+.memo-text { font-size: 28rpx; line-height: 1.8; white-space: pre-wrap; word-break: break-all; }

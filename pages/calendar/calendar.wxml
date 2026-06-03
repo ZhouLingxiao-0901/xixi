@@ -1,0 +1,58 @@
+<view class="container">
+  <!-- 视图切换 -->
+  <view class="view-switch">
+    <text class="switch-item {{view === 'day' ? 'active' : ''}}" bindtap="switchView" data-view="day">日</text>
+    <text class="switch-item {{view === 'week' ? 'active' : ''}}" bindtap="switchView" data-view="week">周</text>
+    <text class="switch-item {{view === 'month' ? 'active' : ''}}" bindtap="switchView" data-view="month">月</text>
+  </view>
+
+  <!-- 日期导航 -->
+  <view class="date-nav">
+    <text class="nav-arrow" bindtap="prev">◀</text>
+    <text class="nav-title">{{dateTitle}}</text>
+    <text class="nav-arrow" bindtap="next">▶</text>
+  </view>
+
+  <!-- 日视图 -->
+  <view wx:if="{{view === 'day'}}" class="day-view fade-in">
+    <view class="day-label">{{dayLabel}}</view>
+    <view wx:if="{{dayTasks.length === 0}}" class="empty-hint">该日无待办</view>
+    <view wx:for="{{dayTasks}}" wx:key="id" class="task-item card">
+      <text class="dot" style="background:{{item.completed ? '#4ECDC4' : '#6C63FF'}}"></text>
+      <text class="task-text {{item.completed ? 'done' : ''}}">{{item.title}}</text>
+    </view>
+  </view>
+
+  <!-- 周视图 -->
+  <view wx:if="{{view === 'week'}}" class="week-view fade-in">
+    <view class="week-header">
+      <text wx:for="{{weekDays}}" wx:key="index" class="week-day {{item.isToday ? 'today' : ''}}">
+        {{item.name}}\n{{item.date}}
+      </text>
+    </view>
+    <view class="week-body">
+      <view wx:for="{{weekDays}}" wx:key="index" class="week-col">
+        <view wx:for="{{item.tasks}}" wx:key="id" class="week-dot" style="background:{{item.completed ? '#4ECDC4' : '#6C63FF'}}"></view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 月视图 -->
+  <view wx:if="{{view === 'month'}}" class="month-view fade-in">
+    <view class="month-grid">
+      <text class="grid-cell header" wx:for="{{['日','一','二','三','四','五','六']}}" wx:key="*this">{{item}}</text>
+      <view wx:for="{{monthCells}}" wx:key="index" class="grid-cell {{item.isToday ? 'today' : ''}} {{item.isCurrentMonth ? '' : 'other-month'}}">
+        <text class="cell-date">{{item.date}}</text>
+        <view wx:if="{{item.count > 0}}" class="cell-badge">{{item.count}}</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 当日任务列表 -->
+  <view class="section-header">当日任务</view>
+  <view wx:for="{{selectedDayTasks}}" wx:key="id" class="task-item card">
+    <text class="dot" style="background:{{item.completed ? '#4ECDC4' : '#6C63FF'}}"></text>
+    <text class="task-text {{item.completed ? 'done' : ''}}">{{item.title}}</text>
+  </view>
+  <view wx:if="{{selectedDayTasks.length === 0}}" class="empty-hint">该日无待办</view>
+</view>
