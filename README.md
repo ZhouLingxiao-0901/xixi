@@ -60,3 +60,6 @@ young_plan_app/
 ## License
 
 MIT
+
+## 开发说明
+本微信待办小程序由AI辅助编码、调试与部署
